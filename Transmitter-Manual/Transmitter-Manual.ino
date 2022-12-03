@@ -6,9 +6,8 @@ RF24 radio(7, 8); // CE, CSN
 
 const byte address[6] = "00001";
 
-int input;
-int instruction = 0;
-
+int input = 0;
+int instruction =0;
 
 void setup() {
   Serial.begin(9600);
@@ -24,7 +23,7 @@ void setup() {
 }
 
 void loop() {
-  if(Serial.available()){
+  if(Serial.available() > 0){
     input = Serial.parseInt();
     if(input == 0 || input == 1 || input == 2){
       instruction = input;
@@ -32,8 +31,9 @@ void loop() {
       Serial.println("Invalid instruction, falling back to previous instruction");
       delay(3000);
     }
+    
   }
-
+  Serial.print("Sending instruction: ");
   Serial.println(instruction);
   radio.write(&instruction, sizeof(instruction));
   

@@ -23,24 +23,24 @@ void loop() {
   if (radio.available()) {
     // Reads in the instruction coming in
     radio.read(&instruction, sizeof(instruction));
-
+    
     // Instruction 0: Stop both Pumps 
     // Instruction 1: Fill Tank
     // Instruction 2: Empty Tank
     if(instruction == 1){
-      Serial.println("Decreasing Buoyancy");
-      digitalWrite(fillPump, HIGH);
-      digitalWrite(releasePump, LOW);
+      Serial.println("Filling Tank");
+//      digitalWrite(fillPump, HIGH);
+//      digitalWrite(releasePump, LOW);
       
     } else if (instruction == 2){
-      Serial.println("Increasing Buoyancy");
-      digitalWrite(releasePump, HIGH);
-      digitalWrite(fillPump, LOW);
+      Serial.println("Emptying Tank");
+//      digitalWrite(releasePump, HIGH);
+//      digitalWrite(fillPump, LOW);
       
     } else {
       Serial.println("Stop");
-      digitalWrite(releasePump, LOW);
-      digitalWrite(fillPump, LOW);
+//      digitalWrite(releasePump, LOW);
+//      digitalWrite(fillPump, LOW);
     }
   }
 }
