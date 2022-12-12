@@ -22,9 +22,10 @@ void setup() {
 
 void loop() {
   currentTime = millis();
-  if(currentTime - startTime < 10000){
+  elapsed = currentTime - startTime;
+  if(elapsed < 25000){
     instruction = 1;
-  } else if (currentTime - startTime < 20000) {
+  } else if (elapsed < 25000 && elapsed < 45000) {
     instruction = 2;
   } else {
     instruction = 0;

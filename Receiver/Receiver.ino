@@ -2,10 +2,10 @@
 #include <nRF24L01.h>
 #include <RF24.h>
 
-#define fillPump 6
-#define releasePump 7
+#define fillPump 2
+#define releasePump 4
 
-RF24 radio(7, 8); // CE, CSN
+RF24 radio(9, 10); // CE, CSN
 
 const byte address[6] = "00001";
 
@@ -13,6 +13,9 @@ int instruction = 0;
 
 void setup() {
   Serial.begin(9600);
+  pinMode(fillPump, OUTPUT);
+  pinMode(releasePump, OUTPUT);
+  
   radio.begin();
   radio.openReadingPipe(0, address);
   radio.setPALevel(RF24_PA_MIN);
@@ -27,20 +30,21 @@ void loop() {
     // Instruction 0: Stop both Pumps 
     // Instruction 1: Fill Tank
     // Instruction 2: Empty Tank
+    
     if(instruction == 1){
-      Serial.println("Filling Tank");
-//      digitalWrite(fillPump, HIGH);
-//      digitalWrite(releasePump, LOW);
+//      Serial.println("Filling Tank");
+      digitalWrite(fillPump, HIGH);
+      digitalWrite(releasePump, LOW);
       
     } else if (instruction == 2){
-      Serial.println("Emptying Tank");
-//      digitalWrite(releasePump, HIGH);
-//      digitalWrite(fillPump, LOW);
+//      Serial.println("Emptying Tank");
+      digitalWrite(releasePump, HIGH);
+      digitalWrite(fillPump, LOW);
       
     } else {
-      Serial.println("Stop");
-//      digitalWrite(releasePump, LOW);
-//      digitalWrite(fillPump, LOW);
+//      Serial.println("Stop");
+      digitalWrite(releasePump, LOW);
+      digitalWrite(fillPump, LOW);
     }
   }
 }

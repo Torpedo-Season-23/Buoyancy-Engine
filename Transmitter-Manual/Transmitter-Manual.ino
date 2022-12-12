@@ -15,10 +15,14 @@ void setup() {
   radio.openWritingPipe(address);
   radio.setPALevel(RF24_PA_MIN);
   radio.stopListening();
+
+  
   Serial.println("Enter any instruction to start sequence... ");
   Serial.println("0 Stop ");
   Serial.println("1 Fill Tank");
   Serial.println("2 Empty Tank");
+  
+  // Stays in setup until the first instruction is sent
   while(!Serial.available());
 }
 
