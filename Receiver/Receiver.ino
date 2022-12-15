@@ -12,7 +12,7 @@ const byte address[6] = "00001";
 int instruction = 0;
 
 void setup() {
-  Serial.begin(9600);
+//  Serial.begin(9600);
   pinMode(fillPump, OUTPUT);
   pinMode(releasePump, OUTPUT);
   
@@ -26,7 +26,6 @@ void loop() {
   if (radio.available()) {
     // Reads in the instruction coming in
     radio.read(&instruction, sizeof(instruction));
-    
     // Instruction 0: Stop both Pumps 
     // Instruction 1: Fill Tank
     // Instruction 2: Empty Tank
@@ -40,7 +39,7 @@ void loop() {
 //      Serial.println("Emptying Tank");
       digitalWrite(releasePump, HIGH);
       digitalWrite(fillPump, LOW);
-      
+//      
     } else {
 //      Serial.println("Stop");
       digitalWrite(releasePump, LOW);
